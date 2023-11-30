@@ -28,12 +28,17 @@ public class RabbitConfig {
     public static final String QUEUE_NAME_2 = "transactions-queue-2";
     public static final String EXCHANGE_NAME = "transactions-exchange";
     public static final String ROUTING_KEY_NAME = "transactions.routing.key";
-    public static final String URI_NAME = "amqp://guest:guest@localhost:5672";
-
+    @Value("${rabbit.uri}")
+    public static String URI_NAME;
 
     @Bean
-    public AmqpAdmin amqpAdmin() {
-        CachingConnectionFactory connectionFactory = new CachingConnectionFactory(URI.create(URI_NAME));
+    public static URI uri(@Value("${rabbit.uri}") String uri) {
+        URI_NAME = uri;
+        return URI.create(uri);
+    }
+    @Bean
+    public AmqpAdmin amqpAdmin(URI uri) {
+        CachingConnectionFactory connectionFactory = new CachingConnectionFactory(uri);
         var amqpAdmin =  new RabbitAdmin(connectionFactory);
 
         var exchange = new TopicExchange(EXCHANGE_NAME);
@@ -50,10 +55,10 @@ public class RabbitConfig {
 
 
     @Bean
-    public ConnectionFactory connectionFactory() throws NoSuchAlgorithmException, KeyManagementException, URISyntaxException {
+    public ConnectionFactory connectionFactory(URI uri) throws NoSuchAlgorithmException, KeyManagementException, URISyntaxException {
         ConnectionFactory connectionFactory = new ConnectionFactory();
         connectionFactory.useNio();
-        connectionFactory.setUri(URI_NAME);
+        connectionFactory.setUri(uri);
         return connectionFactory;
     }
 
