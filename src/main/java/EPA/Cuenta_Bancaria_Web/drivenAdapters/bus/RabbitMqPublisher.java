@@ -22,4 +22,10 @@ public class RabbitMqPublisher {
                 .send(Mono.just(new OutboundMessage(RabbitConfig.EXCHANGE_NAME,
                         RabbitConfig.ROUTING_KEY_NAME, gson.toJson(object).getBytes()))).subscribe();
     }
+
+    public void publishError(Object object) {
+        sender
+              .send(Mono.just(new OutboundMessage(RabbitConfig.EXCHANGE_NAME,
+                        RabbitConfig.ROUTING_KEY_ERROR, gson.toJson(object).getBytes()))).subscribe();
+    }
 }
