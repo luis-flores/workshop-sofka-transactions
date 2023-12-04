@@ -65,11 +65,20 @@ public class Cuenta_ImpMongo implements I_Cuenta
     @Override
     public Mono<M_Cuenta_DTO> actualizarSaldo(M_Cuenta_DTO p_Cuenta) {
         String id = p_Cuenta.getId();
-        M_CuentaMongo cuenta = repositorio_Cuenta.findById(id).block();
+        return repositorio_Cuenta.findById(id).flatMap(cuentaModel ->{
+            cuentaModel.setSaldo_Global(p_Cuenta.getSaldo_Global());
+            return repositorio_Cuenta.save(cuentaModel);
+        }).map(cuentaModel -> new M_Cuenta_DTO(
+            cuentaModel.getId(),
+            new M_Cliente_DTO(
+                cuentaModel.getCliente().getId(),
+                cuentaModel.getCliente().getNombre()),
+            cuentaModel.getSaldo_Global()
+        ));
 
-        cuenta.setSaldo_Global(p_Cuenta.getSaldo_Global());
+        //cuenta.setSaldo_Global(p_Cuenta.getSaldo_Global());
 
-        repositorio_Cuenta.save(cuenta).block();
+        //repositorio_Cuenta.save(cuenta).block();
 
 //        repositorio_Cuenta.findById(id)
 //            .map(cuentaEncontrada -> {
@@ -83,13 +92,7 @@ public class Cuenta_ImpMongo implements I_Cuenta
 //            })
 //            .subscribe();
 
-        return Mono.just(new M_Cuenta_DTO(
-            cuenta.getId(),
-            new M_Cliente_DTO(
-                cuenta.getCliente().getId(),
-                cuenta.getCliente().getNombre()),
-            cuenta.getSaldo_Global()
-        ));
+        //return Mono.just();
         /*
         return repositorio_Cuenta.findById(p_Cuenta.getId())
             .map(cuenta -> {

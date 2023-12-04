@@ -62,7 +62,8 @@ public class Transaccion_ImpMongo implements I_Transaccion
                         tipo.toString()
                     );
                     return cuenta_repositorio.save(cuenta)
-                        .flatMap(cuentaCreada -> Mono.error(new ErrorGuardado(
+                        .flatMap(cuentaCreada ->
+                            Mono.error(new ErrorGuardado(
                             "Error de prueba",
                             transaccion
                         )))

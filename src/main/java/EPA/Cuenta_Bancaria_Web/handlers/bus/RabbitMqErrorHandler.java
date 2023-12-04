@@ -50,7 +50,7 @@ public class RabbitMqErrorHandler implements CommandLineRunner {
                         ),
                         cuenta.getSaldo_Global()
                     )
-                );
+                ).subscribe();
 
                 servicioTransaccion.borrar(
                     new M_Transaccion_DTO(
@@ -62,7 +62,7 @@ public class RabbitMqErrorHandler implements CommandLineRunner {
                         transaccion.getCosto_tansaccion(),
                         transaccion.getTipo()
                     )
-                );
+                ).subscribe();
 
                 System.out.println("La transaccion a reversar fue:  " + transaccion);
                 return transaccion;
