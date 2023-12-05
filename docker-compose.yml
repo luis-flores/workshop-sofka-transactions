@@ -18,9 +18,11 @@ services:
       EPA.Deposito.OtraCuenta: 1.50
       EPA.Deposito.Sucursal: 0.00
       server.port: 8086
-      rabbit.uri: "amqps://ptwysuun:7MkBMx5cdPBCwVS7jIWfwvPfiMBQ-SB-@gull.rmq.cloudamqp.com:5671/ptwysuun"
+#      rabbit.uri: "amqps://ptwysuun:7MkBMx5cdPBCwVS7jIWfwvPfiMBQ-SB-@gull.rmq.cloudamqp.com:5671/ptwysuun"
+      rabbit.uri: "amqp://guest:guest@10.17.210.226:5672"
     depends_on:
       - mongodb
+      - rabbitmq
     restart: on-failure
     networks:
       - workshop-transactions
@@ -39,8 +41,20 @@ services:
     networks:
       - workshop-transactions
 
+
+  rabbitmq:
+    image: rabbitmq:3.12.10-management
+    container_name: sofka-rabbit
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - workshop-transactions
+
+
 volumes:
   mongo-data:
 
 networks:
   workshop-transactions:
+    name: sofka-net
