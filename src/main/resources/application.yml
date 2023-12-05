@@ -1,0 +1,28 @@
+server:
+  port: 8086
+
+EPA:
+  Deposito:
+    Sucursal: 0.00
+    Cajero: 2.00
+    OtraCuenta: 1.50
+  Compra:
+    Fisica: 0.00
+    Web: 5.00
+
+  Motor_BD: MONGO
+
+spring:
+  data:
+    mongodb:
+#      uri: "mongodb://root:admin@mongodb:27016/transactions_reactive"
+#      uri: "mongodb://floresluisdiego:B20FSibItarlMCK9@cluster0.3bcvnq3.mongodb.net/transactions_reactive"
+#      uri: "mongodb://root:admin@mongodb:27016/transactions_reactive"
+#      uri: "mongodb://root:admin@10.17.210.226:27016/transactions_reactive"
+#      uri: "mongodb://mongodb:27016/transactions_reactive"
+      uri: "mongodb://10.17.210.226:27016/transactions_reactive"
+
+
+
+rabbit:
+  uri: ${rabbit.uri}

@@ -1,0 +1,46 @@
+version: '3.9'
+services:
+  web:
+    container_name: sofka-web
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    working_dir: /app
+    ports:
+      - 8086:8086
+      - 5005:5005
+    environment:
+      BD.password: root
+      BD.username: admin
+      EPA.Compra.Fisica: 0.00
+      EPA.Compra.Web: 5.00
+      EPA.Deposito.Cajero: 2.00
+      EPA.Deposito.OtraCuenta: 1.50
+      EPA.Deposito.Sucursal: 0.00
+      server.port: 8086
+      rabbit.uri: "amqps://ptwysuun:7MkBMx5cdPBCwVS7jIWfwvPfiMBQ-SB-@gull.rmq.cloudamqp.com:5671/ptwysuun"
+    depends_on:
+      - mongodb
+    restart: on-failure
+    networks:
+      - workshop-transactions
+
+
+  mongodb:
+    image: mongo:7.0.4
+    container_name: sofka-mongo
+    ports:
+      - "27016:27017"
+#    environment:
+#      MONGO_INITDB_ROOT_USERNAME: root
+#      MONGO_INITDB_ROOT_PASSWORD: admin
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - workshop-transactions
+
+volumes:
+  mongo-data:
+
+networks:
+  workshop-transactions:
