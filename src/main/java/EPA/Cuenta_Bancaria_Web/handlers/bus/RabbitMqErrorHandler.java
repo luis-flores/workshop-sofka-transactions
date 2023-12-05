@@ -1,13 +1,8 @@
 package EPA.Cuenta_Bancaria_Web.handlers.bus;
 
-import EPA.Cuenta_Bancaria_Web.RabbitConfig;
-import EPA.Cuenta_Bancaria_Web.drivenAdapters.repositorios.I_RepositorioCuentaMongo;
-import EPA.Cuenta_Bancaria_Web.drivenAdapters.repositorios.I_Repositorio_TransaccionMongo;
 import EPA.Cuenta_Bancaria_Web.models.DTO.M_Cliente_DTO;
 import EPA.Cuenta_Bancaria_Web.models.DTO.M_Cuenta_DTO;
 import EPA.Cuenta_Bancaria_Web.models.DTO.M_Transaccion_DTO;
-import EPA.Cuenta_Bancaria_Web.models.Mongo.M_ClienteMongo;
-import EPA.Cuenta_Bancaria_Web.models.Mongo.M_CuentaMongo;
 import EPA.Cuenta_Bancaria_Web.services.Cuenta.Cuenta_ImpMongo;
 import EPA.Cuenta_Bancaria_Web.services.Transaccion.Transaccion_ImpMongo;
 import com.google.gson.Gson;

@@ -1,4 +1,4 @@
-package EPA.Cuenta_Bancaria_Web;
+package EPA.Cuenta_Bancaria_Web.handlers.bus;
 
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;

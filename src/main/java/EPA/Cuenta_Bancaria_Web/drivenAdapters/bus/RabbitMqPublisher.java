@@ -1,6 +1,6 @@
 package EPA.Cuenta_Bancaria_Web.drivenAdapters.bus;
 
-import EPA.Cuenta_Bancaria_Web.RabbitConfig;
+import EPA.Cuenta_Bancaria_Web.handlers.bus.RabbitConfig;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

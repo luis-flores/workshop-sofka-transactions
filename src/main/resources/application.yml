@@ -1,15 +1,14 @@
 server:
-  port: 8086
+  port: ${server.port}
 
 EPA:
   Deposito:
-    Sucursal: 0.00
-    Cajero: 2.00
-    OtraCuenta: 1.50
+    Sucursal: ${EPA.Deposito.Sucursal}
+    Cajero: ${EPA.Deposito.Cajero}
+    OtraCuenta: ${EPA.Deposito.OtraCuenta}
   Compra:
-    Fisica: 0.00
-    Web: 5.00
-
+    Fisica: ${EPA.Compra.Fisica}
+    Web: ${EPA.Compra.Web}
   Motor_BD: MONGO
 
 spring:
@@ -21,7 +20,6 @@ spring:
 #      uri: "mongodb://root:admin@10.17.210.226:27016/transactions_reactive"
 #      uri: "mongodb://mongodb:27016/transactions_reactive"
       uri: "mongodb://10.17.210.226:27016/transactions_reactive"
-
 
 
 rabbit:

@@ -5,18 +5,13 @@ import EPA.Cuenta_Bancaria_Web.models.DTO.M_Cliente_DTO;
 import EPA.Cuenta_Bancaria_Web.models.DTO.M_Cuenta_DTO;
 import EPA.Cuenta_Bancaria_Web.models.Mongo.M_ClienteMongo;
 import EPA.Cuenta_Bancaria_Web.models.Mongo.M_CuentaMongo;
-import EPA.Cuenta_Bancaria_Web.RabbitConfig;
 import EPA.Cuenta_Bancaria_Web.drivenAdapters.repositorios.I_RepositorioCuentaMongo;
-import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import reactor.rabbitmq.OutboundMessage;
 import reactor.rabbitmq.Sender;
-
-import java.math.BigDecimal;
 
 
 @Service()
@@ -39,7 +34,6 @@ public class Cuenta_ImpMongo implements I_Cuenta
                 new M_ClienteMongo(p_Cuenta_DTO.getCliente().getId(),
                         p_Cuenta_DTO.getCliente().getNombre()),
                 p_Cuenta_DTO.getSaldo_Global());
-
 
         eventBus.publishMessage(cuenta);
 
