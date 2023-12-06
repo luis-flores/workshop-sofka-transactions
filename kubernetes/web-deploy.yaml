@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sofka-web
+  template:
+    metadata:
+      labels:
+        app: sofka-web
+    spec:
+      containers:
+      - name: sofka-web
+        image: ldflores/sofka-web
+        ports:
+        - containerPort: 8086
+        env:
+        - name: server.port
+          valueFrom:
+            configMapKeyRef:
+              name: web-config
+              key: server.port
+        - name: EPA.Compra.Fisica
+          valueFrom:
+            configMapKeyRef:
+              name: web-config
+              key: EPA.Compra.Fisica
+        - name: EPA.Compra.Web
+          valueFrom:
+            configMapKeyRef:
+              name: web-config
+              key: EPA.Compra.Web
+        - name: EPA.Deposito.Cajero
+          valueFrom:
+            configMapKeyRef:
+              name: web-config
+              key: EPA.Deposito.Cajero
+        - name: EPA.Deposito.OtraCuenta
+          valueFrom:
+            configMapKeyRef:
+              name: web-config
+              key: EPA.Deposito.OtraCuenta
+        - name: EPA.Deposito.Sucursal
+          valueFrom:
+            configMapKeyRef:
+              name: web-config
+              key: EPA.Deposito.Sucursal
+        - name: rabbit.uri
+          valueFrom:
+            configMapKeyRef:
+              name: web-config
+              key: rabbit.uri
+        - name: mongo.uri
+          valueFrom:
+            configMapKeyRef:
+              name: web-config
+              key: mongo.uri
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-service
+spec:
+  selector:
+    app: sofka-web
+  ports:
+  - protocol: TCP
+    port: 8086
+    targetPort: 8086
