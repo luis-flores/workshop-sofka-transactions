@@ -14,13 +14,7 @@ EPA:
 spring:
   data:
     mongodb:
-#      uri: "mongodb://root:admin@mongodb:27016/transactions_reactive"
-#      uri: "mongodb://floresluisdiego:B20FSibItarlMCK9@cluster0.3bcvnq3.mongodb.net/transactions_reactive"
-#      uri: "mongodb://root:admin@mongodb:27016/transactions_reactive"
-#      uri: "mongodb://root:admin@10.17.210.226:27016/transactions_reactive"
-#      uri: "mongodb://mongodb:27016/transactions_reactive"
-      uri: "mongodb://10.17.210.226:27016/transactions_reactive"
-
+      uri: ${mongo.uri}
 
 rabbit:
   uri: ${rabbit.uri}
